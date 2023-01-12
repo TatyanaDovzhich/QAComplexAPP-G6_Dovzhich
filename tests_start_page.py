@@ -1,5 +1,7 @@
 """Tests related to start page"""
 import logging
+import random
+import string
 from time import sleep
 
 from selenium import webdriver
@@ -10,6 +12,16 @@ class TestStartPage:
     """Stores tests for start page base functionality"""
 
     log = logging.getLogger("[StartPage]")
+
+    @staticmethod
+    def random_num():
+        """Generate random number"""
+        return str(random.randint(111111, 999999))
+
+    @staticmethod
+    def random_str(length=5):
+        """Generate random string"""
+        return ''.join(random.choice(string.ascii_letters) for _ in range(length))
 
     def test_invalid_sign_in(self):
         """
@@ -86,8 +98,7 @@ class TestStartPage:
         sleep(1)
 
         # Click on Sign In button
-        sign_in_button = driver.find_
-        ick()
+        sign_in_button = driver.find_ick()
         self.log.info("SignIn button was click")
         sleep(1)
 
@@ -98,3 +109,52 @@ class TestStartPage:
         sleep(1)
 
         driver.close()
+
+        def test_register(self):
+            """
+            - Pre-conditions:
+                - Open start page
+            - Steps:
+                - Fill email, login and password fields
+                - Click on Sign Up button
+                - Verify registration is successful
+            """
+            # Open start page
+            driver = webdriver.Chrome(
+                executable_path="F:\QALight_Python\GitHub\My Repository\QAComplexAPP-G6_Dovzhich\chromedriver")
+            driver.get("https://qa-complexapp.onrender.com")
+            self.log.info("Open page")
+
+            # Fill username
+            username_value = f"{self.random_str()}{self.random_num()}"
+            username = driver.find_element(by=By.XPATH, value=".//input[@id='username-register']")
+            username.clear()
+            username.send_keys(username_value)
+
+            # Fill email
+            email_value = f"{username_value}@mail.com"
+            email = driver.find_element(by=By.XPATH, value=".//input[@id='email-register']")
+            email.clear()
+            email.send_keys(email_value)
+
+            # Fill password
+            password_value = f"{self.random_str(6)}{self.random_num()}"
+            password = driver.find_element(by=By.XPATH, value=".//input[@id='password-register']")
+            password.clear()
+            password.send_keys(password_value)
+            self.log.info("Fields were filled")
+            sleep(2)
+
+            # Click on Sign Up button
+            driver.find_element(by=By.XPATH, value=".//button[@type='submit']").click()
+            self.log.info("User was registered")
+            sleep(1)
+
+            # Verify register success
+            hello_message = driver.find_element(by=By.XPATH, value=".//h2")
+            assert username_value.lower() in hello_message.text
+            assert hello_message.text == f"Hello {username_value.lower()}, your feed is empty."
+            assert driver.find_element(by=By.XPATH, value=".//strong").text == username_value.lower()
+            self.log.info("Registration for user '%s' was success and verified", username_value)
+
+            driver.close()
