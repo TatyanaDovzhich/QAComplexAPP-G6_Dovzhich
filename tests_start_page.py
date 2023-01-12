@@ -55,3 +55,46 @@ class TestStartPage:
         sleep(1)
 
         driver.close()
+
+    def test_empty_login(self):
+        """
+        - Pre-conditions:
+            - Open start page
+        - Steps:
+            - Fill login
+            - Fill password
+            - Click on SignIn button
+            - Verify error
+        """
+        # Open start page
+        driver = webdriver.Chrome(
+            executable_path="F:\QALight_Python\GitHub\My Repository\QAComplexAPP-G6_Dovzhich\chromedriver")
+        driver.get("https://qa-complexapp.onrender.com")
+        self.log.info("Start page was opened")
+        sleep(1)
+
+        # Fill login
+        login_field = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Username']")
+        login_field.clear()
+        self.log.info("Login field was filled")
+        sleep(1)
+
+        # Fill password
+        password_field = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Password']")
+        password_field.clear()
+        self.log.info("Password field was filled")
+        sleep(1)
+
+        # Click on Sign In button
+        sign_in_button = driver.find_
+        ick()
+        self.log.info("SignIn button was click")
+        sleep(1)
+
+        # Verify error
+        error_message = driver.find_element(by=By.XPATH, value=".//div[@class='alert alert-danger text-center']")
+        assert error_message.text == "Error"
+        self.log.info("Error message was verified")
+        sleep(1)
+
+        driver.close()
