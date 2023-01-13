@@ -158,3 +158,50 @@ class TestStartPage:
             self.log.info("Registration for user '%s' was success and verified", username_value)
 
             driver.close()
+
+            def test_valid_login(self):
+                """
+                - Pre-conditions:
+                    - Open start page
+                - Steps:
+                    - Fill login
+                    - Fill password
+                    - Click on SignIn button
+                    - Verify login is successful
+                """
+                # Open start page
+                driver = webdriver.Chrome(executable_path="F:\QALight_Python\pythonProject4\chromedriver")
+                driver.get("https://qa-complexapp.onrender.com")
+                self.log.info("Start page was opened")
+                sleep(1)
+
+                # Fill login
+                login_value = f"{self.random_str()}{self.random_num()}"
+                login = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Username']")
+                login.clear()
+                login.send_keys(login_value)
+                self.log.info("Login field was filled")
+                sleep(1)
+
+                # Fill password
+                password_value = f"{self.random_str(6)}{self.random_num()}"
+                password = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Password']")
+                password.clear()
+                password.send_keys(password_value)
+                self.log.info("Password field was filled")
+                sleep(1)
+
+                # Click on SignIn button
+                sign_in_button = driver.find_element(by=By.XPATH, value=".//button[text()='Sign In']")
+                sign_in_button.click()
+                self.log.info("Sign In button was click")
+                sleep(1)
+
+                # Verify login success
+                hello_message = driver.find_element(by=By.XPATH, value=".//h2")
+                assert login_value.lower() in hello_message.text
+                assert hello_message.text == f"Hello {login_value.lower()}, your feed is empty."
+                assert driver.find_element(by=By.XPATH, value=".//strong").text == login_value.lower()
+                self.log.info("Login for user '%s' was success and verified", login_value)
+
+                driver.close()
