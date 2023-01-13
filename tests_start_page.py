@@ -205,3 +205,93 @@ class TestStartPage:
                 self.log.info("Login for user '%s' was success and verified", login_value)
 
                 driver.close()
+
+                def test_invalid_login_with_empty_login_field(self):
+                    """
+                    - Pre-conditions:
+                        - Open start page
+                    - Steps:
+                        - Stay empty login field
+                        - Fill password field
+                        - Click on Sign In button
+                        - Verify Error Message
+                    """
+                    # Open start page
+                    driver = webdriver.Chrome(executable_path="F:\QALight_Python\pythonProject4\chromedriver")
+                    driver.get("https://qa-complexapp.onrender.com")
+                    self.log.info("Start page was opened")
+                    sleep(1)
+
+                    # Stay empty login field
+                    login = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Username']")
+                    login.clear()
+                    self.log.info("Login field remains empty")
+                    sleep(1)
+
+                    # Fill password field
+                    password_value = f"{self.random_str(6)}{self.random_num()}"
+                    password = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Password']")
+                    password.clear()
+                    password.send_keys(password_value)
+                    self.log.info("Password field was filled")
+                    sleep(1)
+
+                    # Click on Sign In button
+                    sign_in_button = driver.find_element(by=By.XPATH, value=".//button[text()='Sign In']")
+                    sign_in_button.click()
+                    self.log.info("Sign In button was click")
+                    sleep(1)
+
+                    # Verify Error Message
+                    error_message = driver.find_element(by=By.XPATH,
+                                                        value=".//div[@class='alert alert-danger text-center']")
+                    assert error_message.text == "Error"
+                    self.log.info("Error message was verified")
+                    sleep(1)
+
+                    driver.close()
+
+                def test_invalid_login_with_empty_password_field(self):
+                    """
+                    - Pre-conditions:
+                        - Open start page
+                    - Steps:
+                        - Fill login field
+                        - Stay empty password field
+                        - Click on Sign In button
+                        - Verify Error Message
+                    """
+                    # Open start page
+                    driver = webdriver.Chrome(executable_path="F:\QALight_Python\pythonProject4\chromedriver")
+                    driver.get("https://qa-complexapp.onrender.com")
+                    self.log.info("Start page was opened")
+                    sleep(1)
+
+                    # Fill login field
+                    login_value = f"{self.random_str()}{self.random_num()}"
+                    login = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Username']")
+                    login.clear()
+                    login.send_keys(login_value)
+                    self.log.info("Login field was filled")
+                    sleep(1)
+
+                    # Stay empty password field
+                    password = driver.find_element(by=By.XPATH, value=".//input[@placeholder='Password']")
+                    password.clear()
+                    self.log.info("Password field remains empty")
+                    sleep(1)
+
+                    # Click on Sign In button
+                    sign_in_button = driver.find_element(by=By.XPATH, value=".//button[text()='Sign In']")
+                    sign_in_button.click()
+                    self.log.info("Sign In button was click")
+                    sleep(1)
+
+                    # Verify Error Message
+                    error_message = driver.find_element(by=By.XPATH,
+                                                        value=".//div[@class='alert alert-danger text-center']")
+                    assert error_message.text == "Error"
+                    self.log.info("Error message was verified")
+                    sleep(1)
+
+                    driver.close()
