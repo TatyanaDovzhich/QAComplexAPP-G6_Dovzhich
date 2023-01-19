@@ -11,7 +11,6 @@ class StartPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.const = StartPageConst
-        self.hello_page = HelloPage
         self.log = logging.getLogger("[StartPage]")
 
     def sign_in(self, username, password):
