@@ -50,8 +50,7 @@ class BasePage:
 
     def click(self, xpath):
         """Find and click on the element by provided xpath"""
-
-    self.wait_until_clickable(by=By.XPATH, xpath=xpath).click()
+        self.wait_until_clickable(by=By.XPATH, xpath=xpath).click()
 
     def compare_element_text(self, xpath, text):
         """Compare element text to provided one"""
