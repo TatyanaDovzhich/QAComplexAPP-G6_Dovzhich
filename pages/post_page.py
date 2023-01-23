@@ -1,7 +1,6 @@
-import logging
-
 from constants.post_page import PostPageConsts
 from pages.base_page import BasePage
+from pages.header import Header
 
 
 class PostPage(BasePage):
@@ -10,7 +9,7 @@ class PostPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.const = PostPageConsts
-        self.log = logging.getLogger("[PostPage]")
+        self.header = Header(self.driver)
 
     def verify_post_created(self):
         """Verify post creation message"""

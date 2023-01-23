@@ -1,4 +1,5 @@
 import logging
+from enum import verify
 
 from constants.start_page import StartPageConst
 from pages.base_page import BasePage
@@ -13,14 +14,22 @@ class StartPage(BasePage):
         self.const = StartPageConst
         self.log = logging.getLogger("[StartPage]")
 
+    @wait_until_ok(timeout=3, period=0.5)
+    def click_and_validate_sign_in(self):
+        """Click on Sign In button until it disappear"""
+        self.click(self.const.SIGN_IN_BUTTON_XPATH)
+        assert not self.is_element_exists(self.const.SIGN_IN_BUTTON_XPATH), "Sign In button didn't disappear"
+
     def sign_in(self, username, password):
         """Sign in using provided values"""
         # Fill fields
         self.fill_field(xpath=self.const.SIGN_IN_USERNAME_FIELD_XPATH, value=username)
         self.fill_field(xpath=self.const.SIGN_IN_PASSWORD_FIELD_XPATH, value=password)
-
         # Click on SignIn button
-        self.click(self.const.SIGN_IN_BUTTON_XPATH)
+        if verify:
+            self.click_and_validate_sign_in()
+        else:
+            self.click(self.const.SIGN_IN_BUTTON_XPATH)
 
     def verify_sign_in_error(self):
         """Verify that text is matches to expected"""

@@ -1,7 +1,6 @@
-import logging
-
 from constants.hello_page import HelloPageConsts
 from pages.base_page import BasePage
+from pages.header import Header
 
 
 class HelloPage(BasePage):
@@ -10,7 +9,7 @@ class HelloPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.const = HelloPageConsts
-        self.log = logging.getLogger("[HelloPage]")
+        self.header = Header(self.driver)
 
     def verify_sign_up_message(self, username):
         """Verify sign up message"""
@@ -19,9 +18,4 @@ class HelloPage(BasePage):
         )
         assert self.compare_element_text(xpath=self.const.USERNAME_IN_HELLO_MESSAGE_XPATH, text=username.lower())
 
-    def navigate_to_create_post(self):
-        """Navigate to create post page via header button"""
-        self.click(xpath=self.const.CREATE_POST_BUTTON_XPATH)
 
-        from pages.create_post_page import CreatePostPage
-        return CreatePostPage(self.driver)
