@@ -1,6 +1,7 @@
 from constants.hello_page import HelloPageConsts
 from pages.base_page import BasePage
 from pages.header import Header
+from pages.utils import log_wrapper
 
 
 class HelloPage(BasePage):
@@ -11,6 +12,7 @@ class HelloPage(BasePage):
         self.const = HelloPageConsts
         self.header = Header(self.driver)
 
+    @log_wrapper
     def verify_sign_up_message(self, username):
         """Verify sign up message"""
         assert self.compare_element_text(
