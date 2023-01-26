@@ -21,7 +21,7 @@ class TestHelloPage:
         hello_page = start_page.sign_in(random_login)
 
         # Verify login success
-        hello_page.verify_sign_in_message(username=random_login.username_value)
+        hello_page.verify_sign_up_message(username=random_login.username_value)
 
         # Click on "Sign Out" button
         header.sign_out_button()
@@ -29,3 +29,4 @@ class TestHelloPage:
         # Navigate to start page
         start_page = hello_page.navigate_to_start_page()
         return start_page
+

@@ -25,7 +25,7 @@ class TestProfilePage:
         hello_page = start_page.sign_in(random_login)
 
         # Verify login success
-        hello_page.verify_sign_in_message(username=random_login.username_value)
+        hello_page.verify_sign_up_message(username=random_login.username_value)
 
         # Click on "My Profile" button
         header.my_profile_button()
@@ -51,7 +51,7 @@ class TestProfilePage:
         hello_page = start_page.sign_in(random_login)
 
         # Verify login success
-        hello_page.verify_sign_in_message(username=random_login.username_value)
+        hello_page.verify_sign_up_message(username=random_login.username_value)
 
         # Click on "My Profile" button
         header.my_profile_button()
