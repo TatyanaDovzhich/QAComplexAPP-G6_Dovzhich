@@ -104,3 +104,8 @@ class StartPage(BasePage):
         """Verify that text is matches to expected"""
         assert self.compare_element_text(xpath=self.const.SIGN_UP_EMAIL_EXIST_XPATH,
                                          text=self.const.SIGN_UP_EMAIL_EXIST_TEXT)
+
+    @log_wrapper
+    def verify_sign_in_exists(self):
+        """Verify that Sign In button is present on the page"""
+        assert self.is_element_exists(xpath=self.const.SIGN_IN_BUTTON_XPATH)

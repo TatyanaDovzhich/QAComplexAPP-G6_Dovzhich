@@ -44,8 +44,11 @@ class Header(BasePage):
         """Navigate to create post page via header Create Post button"""
         self.click(xpath=self.const.CREATE_POST_BUTTON_XPATH)
 
+        from pages.create_post_page import CreatePostPage
+        return CreatePostPage(self.driver)
+
     @log_wrapper
-    def navigate_to_start_page(self):
+    def navigate_to_start_page_via_sign_out(self):
         """Navigate to Start Page via header Sign Out button"""
         self.click(xpath=self.const.SIGN_OUT_BUTTON_XPATH)
 
