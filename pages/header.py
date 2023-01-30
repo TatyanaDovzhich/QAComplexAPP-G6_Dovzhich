@@ -2,6 +2,7 @@ from enum import verify
 
 from constants.header import HeaderConsts
 from pages.base_page import BasePage
+from pages.chat import Chat
 from pages.utils import log_wrapper, wait_until_ok
 
 
@@ -67,3 +68,9 @@ class Header(BasePage):
 
         from pages.profile_page import ProfilePage
         return ProfilePage(self.driver)
+
+    @log_wrapper
+    def open_chat(self):
+        """Open chat"""
+        self.click(self.constants.OPEN_CHAT_XPATH)
+        return Chat(self.driver)
