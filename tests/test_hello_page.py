@@ -1,7 +1,9 @@
 """Tests related to hello page"""
 import logging
 
+
 import pytest
+
 
 
 class TestHelloPage:
@@ -9,7 +11,7 @@ class TestHelloPage:
 
     log = logging.getLogger("[TestHelloPage]")
 
-    @pytest.fixture()
+
     def test_sign_out_from_hello_page_after_sign_in(self, start_page, random_login):
         """
         - Pre-conditions:
@@ -22,7 +24,9 @@ class TestHelloPage:
         hello_page = start_page.sign_in(random_login)
 
         # Verify login success
+
         hello_page.verify_sign_up_message(username=random_login.username)
+
 
         # Click on "Sign Out" button
         hello_page.header.sign_out_button()
@@ -30,6 +34,7 @@ class TestHelloPage:
         # Navigate to start page
         start_page = hello_page.navigate_to_start_page()
         return start_page
+
 
     @pytest.fixture()
     def test_sign_out_from_hello_page_after_sign_up(self, start_page, random_user):
@@ -53,3 +58,4 @@ class TestHelloPage:
         # Navigate to start page
         start_page = hello_page.navigate_to_start_page_via_sign_out()
         return start_page
+

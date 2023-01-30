@@ -57,7 +57,8 @@ class Header(BasePage):
         return StartPage(self.driver)
 
     @wait_until_ok(timeout=3, period=0.5)
-    def my_profile_button(self):
+
+    def my_profile_button(self, username, password):
         """Click on My Profile button"""
         self.click(self.const.MY_PROFILE_BUTTON_XPATH)
 

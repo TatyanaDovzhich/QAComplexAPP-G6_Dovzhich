@@ -50,6 +50,7 @@ class TestProfilePage:
         # Verify login success
         hello_page.verify_sign_up_message(username=random_user.username)
 
+
         # Click on "My Profile" button
         hello_page.header.my_profile_button()
 
@@ -59,7 +60,6 @@ class TestProfilePage:
         # Verify profile username
         profile_page.verify_profile_page_message(username=random_user.username)
 
-    @pytest.fixture()
     def test_sign_out_from_profile_page_after_sign_in(self, start_page, random_login):
         """
         - Pre-conditions:
@@ -75,6 +75,7 @@ class TestProfilePage:
 
         # Verify login success
         hello_page.verify_sign_up_message(username=random_login.username)
+
 
         # Click on "My Profile" button
         hello_page.header.my_profile_button()
