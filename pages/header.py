@@ -2,6 +2,7 @@ from enum import verify
 
 from constants.header import HeaderConsts
 from pages.base_page import BasePage
+from pages.chat import Chat
 from pages.utils import log_wrapper, wait_until_ok
 
 
@@ -44,8 +45,11 @@ class Header(BasePage):
         """Navigate to create post page via header Create Post button"""
         self.click(xpath=self.const.CREATE_POST_BUTTON_XPATH)
 
+        from pages.create_post_page import CreatePostPage
+        return CreatePostPage(self.driver)
+
     @log_wrapper
-    def navigate_to_start_page(self):
+    def navigate_to_start_page_via_sign_out(self):
         """Navigate to Start Page via header Sign Out button"""
         self.click(xpath=self.const.SIGN_OUT_BUTTON_XPATH)
 
@@ -53,6 +57,7 @@ class Header(BasePage):
         return StartPage(self.driver)
 
     @wait_until_ok(timeout=3, period=0.5)
+
     def my_profile_button(self, username, password):
         """Click on My Profile button"""
         self.click(self.const.MY_PROFILE_BUTTON_XPATH)
@@ -64,3 +69,9 @@ class Header(BasePage):
 
         from pages.profile_page import ProfilePage
         return ProfilePage(self.driver)
+
+    @log_wrapper
+    def open_chat(self):
+        """Open chat"""
+        self.click(self.constants.OPEN_CHAT_XPATH)
+        return Chat(self.driver)
