@@ -33,7 +33,7 @@ class TestChat:
         expected_messages = []
 
         # Send message
-        for index in range(20)
+        for index in range(20):
             message = f"Hello{index}"
 
             # Send message
